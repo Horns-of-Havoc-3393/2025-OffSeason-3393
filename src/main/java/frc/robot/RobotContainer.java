@@ -24,23 +24,23 @@ public class RobotContainer {
   TalonFX[] driveMotors = new TalonFX[4];
   TalonFX[] steerMotors = new TalonFX[4];
   CANcoder[] encoders = new CANcoder[4];
-  SparkMax elevator1 = new SparkMax(21, MotorType.kBrushless);
-  SparkMax elevator2 = new SparkMax(22, MotorType.kBrushless);
-  SparkMax wristMotor = new SparkMax(24, MotorType.kBrushless);
-  SparkMax rollerMotor = new SparkMax(25, MotorType.kBrushless);
+  // SparkMax elevator1 = new SparkMax(21, MotorType.kBrushless);
+  // SparkMax elevator2 = new SparkMax(22, MotorType.kBrushless);
+  // SparkMax wristMotor = new SparkMax(24, MotorType.kBrushless);
+  // SparkMax rollerMotor = new SparkMax(25, MotorType.kBrushless);
   public SwerveBase swerve;
 
-  public ElvManipSubsystem elvManSub = new ElvManipSubsystem(elevator1, elevator2, wristMotor, rollerMotor);
+  // public ElvManipSubsystem elvManSub = new ElvManipSubsystem(elevator1, elevator2, wristMotor, rollerMotor);
 
-  LoggedNetworkNumber shooterSpeed = new LoggedNetworkNumber("/SmartDashboard/Shooter/speed", 0.0);
+  // LoggedNetworkNumber shooterSpeed = new LoggedNetworkNumber("/SmartDashboard/Shooter/speed", 0.0);
 
   public SwerveAbs absCmd;
 
   private final CommandXboxController controller = new CommandXboxController(0);
-  private final CommandXboxController armOperater = new CommandXboxController(1);
+  // private final CommandXboxController armOperater = new CommandXboxController(1);
 
-  public autoCmd auto;
-  public elevatorAdjust elvAdjustCmd;
+  // public autoCmd auto;
+  // public elevatorAdjust elvAdjustCmd;
 
   long spinUp;
 
@@ -69,22 +69,22 @@ public class RobotContainer {
   private void configureBinds() {
     controller.y().onTrue(new InstantCommand(() -> {swerve.zeroGyro();}, swerve));
 
-    armOperater.rightBumper().onTrue(new InstantCommand(() -> {elvManSub.normal_out();}, elvManSub));
-    armOperater.rightBumper().onFalse(new InstantCommand(() -> {elvManSub.stopRollers();}, elvManSub));
-    armOperater.leftBumper().onTrue(new InstantCommand(() -> {elvManSub.normal_in();}, elvManSub));
-    armOperater.leftBumper().onFalse(new InstantCommand(() -> {elvManSub.stopRollers();}, elvManSub));
-    armOperater.start().onTrue(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.CORAL);}, elvManSub));
-    armOperater.start().onFalse(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.STOW);}, elvManSub));
-    armOperater.a().onTrue(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.L1);}, elvManSub));
-    armOperater.x().onTrue(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.L2);}, elvManSub));
-    armOperater.y().onTrue(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.L3);}, elvManSub));
-    armOperater.b().onTrue(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.L4);}, elvManSub));
-    armOperater.povUp().onTrue(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.DISLODGEH);}, elvManSub));
-    armOperater.povUp().onFalse(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.STOW);}, elvManSub));
-    armOperater.povDown().onTrue(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.DISLODGEL);}, elvManSub));
-    armOperater.povDown().onFalse(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.STOW);}, elvManSub));
+    // armOperater.rightBumper().onTrue(new InstantCommand(() -> {elvManSub.normal_out();}, elvManSub));
+    // armOperater.rightBumper().onFalse(new InstantCommand(() -> {elvManSub.stopRollers();}, elvManSub));
+    // armOperater.leftBumper().onTrue(new InstantCommand(() -> {elvManSub.normal_in();}, elvManSub));
+    // armOperater.leftBumper().onFalse(new InstantCommand(() -> {elvManSub.stopRollers();}, elvManSub));
+    // armOperater.start().onTrue(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.CORAL);}, elvManSub));
+    // armOperater.start().onFalse(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.STOW);}, elvManSub));
+    // armOperater.a().onTrue(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.L1);}, elvManSub));
+    // armOperater.x().onTrue(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.L2);}, elvManSub));
+    // armOperater.y().onTrue(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.L3);}, elvManSub));
+    // armOperater.b().onTrue(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.L4);}, elvManSub));
+    // armOperater.povUp().onTrue(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.DISLODGEH);}, elvManSub));
+    // armOperater.povUp().onFalse(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.STOW);}, elvManSub));
+    // armOperater.povDown().onTrue(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.DISLODGEL);}, elvManSub));
+    // armOperater.povDown().onFalse(new InstantCommand(() -> {elvManSub.gotoSetpoint(ElvManipSubsystem.setpoints.STOW);}, elvManSub));
 
-    armOperater.axisMagnitudeGreaterThan(1,0.05).whileTrue(new RunCommand(() -> {elvManSub.adjustHeight(armOperater.getRawAxis(1) * -2);}, elvManSub));
+    // armOperater.axisMagnitudeGreaterThan(1,0.05).whileTrue(new RunCommand(() -> {elvManSub.adjustHeight(armOperater.getRawAxis(1) * -2);}, elvManSub));
 
     //elvAdjustCmd = new elevatorAdjust(elvManSub, armOperater);
     //elvAdjustCmd.schedule();
